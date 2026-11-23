@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>حذف البيانات · Data deletion — Reachfy</title>
+<link rel="icon" href="/logo-192.png">
+<style>:root{--bg:#F3F4F8;--card:#fff;--ink:#14132B;--muted:#5A5A72;--soft:#4A4A60;--line:#E3E4EC;--field:#C9CAD6;--accent:#4F35E0;--accent-d:#3A24B8;--tint:#ECE9FD;--seg:#E6E7EF;--ok:#0A6B41;--ok-bg:#E3F5EC;--danger:#A1262C}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Arabic',Tahoma,system-ui,sans-serif;font-size:15px;line-height:1.6}
+h1,h2,h3,p{margin:0}h1{font-size:26px;font-weight:700;line-height:1.4}h2{font-size:17px;font-weight:600}
+button,input,textarea{font:inherit;color:inherit}button{cursor:pointer}
+a{color:var(--accent-d)}:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.muted{color:var(--muted);font-size:13px}.ltr{direction:ltr;unicode-bidi:isolate}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px}
+.stack{display:flex;flex-direction:column;gap:16px}.row{display:flex;align-items:center;gap:12px}.grow{flex:1;min-width:0}.between{justify-content:space-between}.wrap{flex-wrap:wrap}
+.btn{min-height:48px;padding:0 20px;border:0;border-radius:14px;background:var(--accent);color:#fff;font-weight:700;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+.btn.block{display:flex;width:100%}.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--field);font-weight:600}.btn.sm{min-height:44px;padding:0 14px;border-radius:12px;font-size:14px}
+.btn.danger{background:#fff;color:var(--danger);border:1px solid var(--line);font-weight:600}
+.pill{font-size:13px;font-weight:600;border-radius:12px;padding:4px 10px;background:var(--ok-bg);color:var(--ok);white-space:nowrap}.pill.tint{background:var(--tint);color:var(--accent-d)}
+.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:13px;color:var(--soft)}
+.input{height:48px;border:1px solid var(--field);border-radius:12px;padding:0 12px;background:#fff;width:100%}textarea.input{height:auto;padding:12px;resize:none;line-height:1.7}
+.err{color:var(--danger);font-size:13px}
+.seg{background:var(--seg);border-radius:14px;padding:4px;display:grid;gap:4px}.seg button{min-height:44px;border:0;border-radius:10px;background:none;color:var(--soft);font-weight:500;padding:0 12px}
+.seg button[aria-pressed=true]{background:#fff;color:var(--ink);font-weight:600}
+.switch{width:56px;height:44px;padding:0;border:0;background:none;display:flex;align-items:center;flex-shrink:0}
+.switch span{width:52px;height:30px;border-radius:15px;padding:3px;display:flex;background:#8A8BA0;justify-content:flex-start}.switch[aria-checked=true] span{background:var(--accent);justify-content:flex-end}
+.switch i{width:24px;height:24px;border-radius:12px;background:#fff}
+.step{width:44px;height:44px;border-radius:12px;border:1px solid var(--field);background:#fff;font-size:22px;line-height:1}.step.plus{background:var(--accent);color:#fff;border:0}.step:disabled{opacity:.45;cursor:default}
+.chip{display:inline-flex;align-items:center;gap:2px;background:var(--tint);color:var(--accent-d);border-radius:14px;padding:0 4px 0 12px;font-size:14px;font-weight:500}
+[dir=rtl] .chip{padding:0 12px 0 4px}.chip button{width:32px;height:32px;border:0;background:none;color:inherit;font-size:16px}
+.logo{width:40px;height:40px;display:block;flex:none}
+.avatar{width:48px;height:48px;border-radius:24px;background:var(--tint);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex-shrink:0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));gap:12px}.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:4px}
+.stat b{font-size:26px;line-height:1.3}.stat.hl b{color:var(--accent)}
+.shell{min-height:100vh;display:flex}.side{width:232px;flex-shrink:0;background:#fff;border-inline-end:1px solid var(--line);padding:24px 16px;display:flex;flex-direction:column;gap:6px}
+.side a,.tabs a{text-decoration:none;color:var(--ink)}.side a{min-height:44px;display:flex;align-items:center;gap:10px;padding:0 12px;border-radius:12px;font-weight:500}
+.side a[aria-current=page]{background:var(--tint);color:var(--accent-d);font-weight:700}
+.main{flex:1;min-width:0;padding:28px clamp(16px,4vw,40px) 40px}.inner{max-width:880px;margin:0 auto}
+.tabs{display:none}
+@media (max-width:860px){.side{display:none}.main{padding-bottom:96px}
+.tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));position:fixed;inset-inline:0;bottom:0;height:72px;background:#fff;border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+.tabs a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:12px;font-weight:500;color:var(--muted)}.tabs a[aria-current=page]{color:var(--accent);font-weight:700}}
+.narrow{max-width:460px;margin:0 auto;padding:20px 20px 40px;min-height:100vh;display:flex;flex-direction:column;gap:20px}
+.iconbtn{width:44px;height:44px;border-radius:22px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink);flex-shrink:0}
+[dir=rtl] .flip{transform:scaleX(-1)}
+.list a,.list .li{display:flex;align-items:center;gap:12px;min-height:60px;text-decoration:none;color:var(--ink);border-top:1px solid var(--line)}.list>:first-child{border-top:0}
+.thumb{width:60px;height:100px;border-radius:10px;background:var(--seg);color:var(--soft);display:flex;align-items:center;justify-content:center;font-size:11px;text-align:center;line-height:1.5;flex-shrink:0;padding:4px}
+.reelstats{border-top:1px solid var(--line);margin:12px -16px -16px;padding:0 16px;min-height:44px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;font-size:13px}.reelstats b{font-weight:700}
+.bars{height:170px;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;align-items:end}.bars div{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px}
+.bars i{width:100%;border-radius:6px 6px 2px 2px;background:#B9AEF5}.bars .max i{background:var(--accent)}
+.meter{height:8px;border-radius:4px;background:var(--seg)}.meter i{display:block;height:8px;border-radius:4px;background:var(--accent)}
+.hero{background:var(--accent);color:#fff;border-radius:22px;padding:22px 20px}
+.note{background:var(--tint);color:#2A1A8C;border-radius:16px;padding:14px 16px;font-size:14px}
+.land header{background:#fff;border-bottom:1px solid var(--line)}.land .w{max-width:1120px;margin:0 auto;padding-inline:24px}
+.land nav a{min-height:44px;display:inline-flex;align-items:center;padding:0 12px;text-decoration:none;color:var(--ink);font-weight:500}
+.land h1{font-size:clamp(32px,5.2vw,58px);line-height:1.3;max-width:760px;text-wrap:balance}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:18px}
+.price{font-size:40px;font-weight:700;line-height:1.2}
+</style>
+</head>
+<body><link rel="preload" as="image" href="/logo-192.png"/><div class="land"><header><div class="w row between wrap" style="padding-block:14px"><a href="/" class="row" style="gap:10px;color:inherit;text-decoration:none" dir="ltr"><img src="/logo-192.png" alt="" width="36" height="36"/><b style="font-size:20px">Reachfy</b></a></div></header><main class="w stack" style="padding:40px 24px 64px;gap:22px;max-width:760px"><div class="stack" style="gap:8px"><h1 style="font-size:32px">حذف البيانات</h1><p class="muted">آخر تحديث: 22 نوفمبر 2026</p><p style="color:var(--soft);line-height:1.9">يمكنك حذف بياناتك من Reachfy بإحدى ثلاث طرق.</p></div><section class="stack" style="gap:8px"><h2 style="font-size:19px;font-weight:700">من داخل Reachfy</h2><p style="line-height:1.9">افتح «المزيد» ثم «حذف الحساب». يتوقف النشر فوراً.</p></section><section class="stack" style="gap:8px"><h2 style="font-size:19px;font-weight:700">بالبريد</h2><p style="line-height:1.9">أرسل من بريد حسابك إلى support@reachfy.app بعنوان «حذف بياناتي».</p></section><section class="stack" style="gap:8px"><h2 style="font-size:19px;font-weight:700">من إنستغرام</h2><p style="line-height:1.9">من إعدادات حسابك في Meta افتح «تكاملات الأعمال» وأزل Reachfy. هذا يلغي صلاحيتنا على حسابك مباشرة.</p></section><section class="stack" style="gap:8px"><h2 style="font-size:19px;font-weight:700">ماذا يُحذف ومتى</h2><ul style="margin:0;padding-inline-start:20px;line-height:1.9"><li>نحذف بيانات حسابك ورمز الوصول وبيانات إنستغرام المخزّنة لدينا خلال 30 يوماً. الريلز التي نُشرت تبقى على حسابك في إنستغرام وتحذفها أنت من هناك.</li><li>سجلات الفواتير تُحفظ للمدة التي يوجبها القانون.</li></ul></section><nav class="row wrap muted" style="gap:18px;font-size:14px;padding-top:12px"><a href="/privacy">الخصوصية</a><a href="/terms">الشروط</a></nav></main></div><link rel="preload" as="image" href="/logo-192.png"/><div dir="ltr" lang="en"><div class="land"><header><div class="w row between wrap" style="padding-block:14px"><a href="/" class="row" style="gap:10px;color:inherit;text-decoration:none" dir="ltr"><img src="/logo-192.png" alt="" width="36" height="36"/><b style="font-size:20px">Reachfy</b><span class="muted" style="font-size:14px">English version</span></a></div></header><main class="w stack" style="padding:40px 24px 64px;gap:22px;max-width:760px"><div class="stack" style="gap:8px"><h1 style="font-size:32px">Data deletion</h1><p class="muted">Last updated: 22 November 2026</p><p style="color:var(--soft);line-height:1.9">You can delete your Reachfy data in any of three ways.</p></div><section class="stack" style="gap:8px"><h2 style="font-size:19px;font-weight:700">Inside Reachfy</h2><p style="line-height:1.9">Open “More”, then “Delete account”. Publishing stops immediately.</p></section><section class="stack" style="gap:8px"><h2 style="font-size:19px;font-weight:700">By email</h2><p style="line-height:1.9">Email support@reachfy.app from your account address with the subject “Delete my data”.</p></section><section class="stack" style="gap:8px"><h2 style="font-size:19px;font-weight:700">From Instagram</h2><p style="line-height:1.9">In your Meta account settings open “Business integrations” and remove Reachfy. This revokes our access to your account at once.</p></section><section class="stack" style="gap:8px"><h2 style="font-size:19px;font-weight:700">What is deleted and when</h2><ul style="margin:0;padding-inline-start:20px;line-height:1.9"><li>We delete your account data, the access token and the Instagram data we hold within 30 days. Reels already published stay on your Instagram account, and you can delete them there.</li><li>Invoice records are kept for as long as the law requires.</li></ul></section><nav class="row wrap muted" style="gap:18px;font-size:14px;padding-top:12px"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav></main></div></div></body>
+</html>

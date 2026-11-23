@@ -1,0 +1,14 @@
+{
+ "updatedAt": "2026-11-23T19:36:47.750Z",
+ "launch": {
+  "seats": 50,
+  "claimed": 0,
+  "left": 50,
+  "days": 30,
+  "open": true
+ },
+ "users": {
+  "active": 0,
+  "show": false
+ }
+}
